@@ -1,10 +1,11 @@
+""" here is your imports """
 from flask import Flask, render_template, request
 from EmotionDetection.emotion_detection import emotion_detector
 
 app = Flask("Emotion Detector")
-
 @app.route("/emotionDetector")
 def sent_detector():
+    """function calls emotion function"""
     text_to_analyze = request.args.get("textToAnalyze")
     format_emotions = emotion_detector(text_to_analyze)
     if format_emotions['max_emotion'] is None:
@@ -19,7 +20,8 @@ def sent_detector():
 
 @app.route("/")
 def render_index_page():
+    """Function renders the page """
     return render_template('index.html')
 
 if __name__ == "__main__":
-     app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000)
