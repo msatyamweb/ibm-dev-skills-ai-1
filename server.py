@@ -7,6 +7,9 @@ app = Flask("Emotion Detector")
 def sent_detector():
     text_to_analyze = request.args.get("textToAnalyze")
     format_emotions = emotion_detector(text_to_analyze)
+    if format_emotions['max_emotion'] is None:
+        return "Invalid text! Please try again."
+
     return (
         f"For the given statement, the system response is 'anger': {format_emotions['anger']}, "
         f"'disgust': {format_emotions['disgust']}, 'fear' : {format_emotions['fear']}, "
